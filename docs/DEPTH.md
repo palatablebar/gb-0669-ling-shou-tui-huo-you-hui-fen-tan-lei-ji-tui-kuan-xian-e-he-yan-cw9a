@@ -26,9 +26,10 @@
 | TRAP-23 | 区间端点 | 直接转换或覆盖产生误判 | 按数据字典处理并保留来源证据 | `app/modules/m4_calculate/rules.py` | `tests/test_calculate.py::test_unit_slices_do_not_overlap` |
 | TRAP-24 | 舍入尾差 | 直接转换或覆盖产生误判 | 按数据字典处理并保留来源证据 | `app/modules/m3_model/rules.py` | `tests/test_model.py::test_largest_remainder_counterexample` |
 | TRAP-26 | 陈旧版本 | 直接转换或覆盖产生误判 | 按数据字典处理并保留来源证据 | `app/store.py` | `tests/test_batches.py::test_sample_old_review_rejected` |
+| TRAP-27 | 单号跨期复用 | 按订单号并账，迟到退货误占新单额度 | 按销售实例（订单号+销售时间）分账，归属不明隔离ORDER_REUSED | `app/modules/m3_model/service.py` `app/modules/m4_calculate/rules.py` | `tests/test_reuse.py::test_reused_number_keeps_separate_accounts` |
 
 ## 对账规则
-优惠分摊守恒；实付=已退+剩余可退；拒绝退款不改累计
+优惠分摊守恒；实付=已退+剩余可退；拒绝退款不改累计；复用单号按销售实例分账，不跨笔冲减
 
 ## 已知不覆盖
 不覆盖换货补差价、积分抵现、多币种汇率与外部支付退款；文件内须包含完整原销售单及售后事件，跨文件结果不自动串接。

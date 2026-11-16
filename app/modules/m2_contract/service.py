@@ -7,4 +7,4 @@ def execute(rows):
     for row in rows:
         try:good.append(convert(row))
         except DomainError as exc:bad.append(issue(row,exc.code,exc.detail))
-    return {'rows':good,'quarantine':bad,'accepted':len(good),'policy':[{'field':'优惠','value':'按单件价格最大余额分摊'},{'field':'退货','value':'按原单件实付顺序退款'},{'field':'运费','value':'整单退完时仅退一次'},{'field':'币种','value':'CNY'},{'field':'金额精度','value':'0.01元'}]}
+    return {'rows':good,'quarantine':bad,'accepted':len(good),'policy':[{'field':'优惠','value':'按单件价格最大余额分摊'},{'field':'退货','value':'按原单件实付顺序退款'},{'field':'退款账户','value':'按订单号+销售时间分账，复用单号不并账'},{'field':'运费','value':'整单退完时仅退一次'},{'field':'币种','value':'CNY'},{'field':'金额精度','value':'0.01元'}]}
